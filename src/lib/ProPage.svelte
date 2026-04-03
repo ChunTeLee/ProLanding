@@ -32,6 +32,10 @@
 	// Reactive icon offsets driven by the wave
 	let iconOffsets: { x: number; y: number }[] = floatingIcons.map(() => ({ x: 0, y: 0 }));
 
+	// Mouse position for cursor attraction
+	let mouseX = -1000;
+	let mouseY = -1000;
+
 	export let auth: Auth.UserAuthInfoFront;
 	export let promo: Promotion | typeof PROMOTION_UNKNOWN | undefined;
 	export let godmode = false;
@@ -176,16 +180,38 @@
 				ctx.fill();
 			}
 
-			// Update floating icon offsets using the same wave
+			// Update floating icon offsets using the same wave + cursor attraction
+			const magnetRadius = 150; // pixels - distance at which attraction starts
+			const magnetStrength = 0.3; // attraction strength (0-1)
+
 			const newOffsets = floatingIcons.map((icon) => {
 				const px = (icon.left / 100) * w;
 				const py = (icon.top / 100) * h;
+
+				// Wave displacement
 				const phase = (px + py) * waveFreq - time * waveSpeed;
 				const wave = Math.sin(phase);
-				return {
-					x: wave * waveAmp * 2.5 * 0.707,
-					y: wave * waveAmp * 2.5 * 0.707,
-				};
+				let offsetX = wave * waveAmp * 2.5 * 0.707;
+				let offsetY = wave * waveAmp * 2.5 * 0.707;
+
+				// Cursor attraction (magnet effect)
+				if (mouseX > -500 && mouseY > -500) {
+					const dx = mouseX - px;
+					const dy = mouseY - py;
+					const distance = Math.sqrt(dx * dx + dy * dy);
+
+					if (distance < magnetRadius) {
+						// Calculate attraction strength based on distance (closer = stronger)
+						const influence = 1 - (distance / magnetRadius);
+						const attraction = influence * influence * magnetStrength; // quadratic falloff
+
+						// Add attraction displacement
+						offsetX += dx * attraction;
+						offsetY += dy * attraction;
+					}
+				}
+
+				return { x: offsetX, y: offsetY };
 			});
 			iconOffsets = newOffsets;
 
@@ -275,9 +301,28 @@
 		const ro = new ResizeObserver(() => computeLines());
 		ro.observe(heroEl);
 		const cleanupDots = initDotWave();
+
+		// Track mouse position for cursor attraction
+		function handleMouseMove(e: MouseEvent) {
+			const rect = heroEl.getBoundingClientRect();
+			mouseX = e.clientX - rect.left;
+			mouseY = e.clientY - rect.top;
+		}
+
+		function handleMouseLeave() {
+			// Move mouse far away to disable attraction
+			mouseX = -1000;
+			mouseY = -1000;
+		}
+
+		heroEl.addEventListener('mousemove', handleMouseMove);
+		heroEl.addEventListener('mouseleave', handleMouseLeave);
+
 		return () => {
 			ro.disconnect();
 			cleanupDots?.();
+			heroEl.removeEventListener('mousemove', handleMouseMove);
+			heroEl.removeEventListener('mouseleave', handleMouseLeave);
 		};
 	});
 
