@@ -285,6 +285,15 @@
 	const bc = "border-[#141c2e]";
 </script>
 
+<style>
+	.icon-pill {
+		background-color: transparent;
+	}
+	.icon-pill:hover {
+		background-color: var(--hover-bg);
+	}
+</style>
+
 <App {auth} {godmode} footerSize="big">
 	<div class="w-full bg-gray-950">
 		{#if promo === PROMOTION_UNKNOWN}
@@ -304,10 +313,8 @@
 			<!-- Floating icon pills — wave-driven wiggle -->
 			{#each floatingIcons as icon, i}
 				<div
-					class="group absolute z-10 flex items-center gap-[3px] rounded-full transition-all duration-200"
-					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px); background-color: transparent; padding: 3px 8px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"
-					onmouseenter="this.style.backgroundColor = 'rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1)'"
-					onmouseleave="this.style.backgroundColor = 'transparent'"
+					class="icon-pill group absolute z-10 flex items-center gap-[3px] rounded-full transition-all duration-200"
+					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px); --hover-bg: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); padding: 3px 8px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"
 				>
 					<img src={icon.src} alt="" style="width: 30px; height: 30px;" />
 					<!-- Text appears on hover -->
