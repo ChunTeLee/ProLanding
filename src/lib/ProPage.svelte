@@ -304,14 +304,14 @@
 			<!-- Floating icon pills — wave-driven wiggle -->
 			{#each floatingIcons as icon, i}
 				<div
-					class="group absolute z-10 flex items-center justify-center rounded-full px-3 py-2 transition-none"
+					class="group absolute z-10 flex items-center rounded-full px-3 py-2 transition-none"
 					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px);"
 				>
 					<img src={icon.src} alt="" style="width: 30px; height: 30px;" />
-					<!-- Tooltip on hover -->
+					<!-- Text pill on hover -->
 					<div
-						class="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-						style="background-color: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500;"
+						class="pointer-events-none ml-[3px] whitespace-nowrap rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+						style="background-color: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 400; padding: 3px 5px;"
 					>
 						{icon.tooltip}
 					</div>
