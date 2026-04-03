@@ -311,7 +311,7 @@
 					<!-- Text appears on hover -->
 					<span
 						class="pointer-events-none max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-200 group-hover:max-w-xs group-hover:opacity-100"
-						style="color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 400;"
+						style="color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 300;"
 					>
 						{icon.tooltip}
 					</span>
