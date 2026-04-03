@@ -304,8 +304,8 @@
 			<!-- Floating icon pills — wave-driven wiggle -->
 			{#each floatingIcons as icon, i}
 				<div
-					class="icon-pill group absolute z-10 flex items-center gap-[3px] rounded-full transition-all duration-200"
-					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px); --hover-bg: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); padding: 3px 8px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);"
+					class="icon-pill group absolute z-50 flex items-center gap-[3px] rounded-full transition-all duration-200"
+					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px); --hover-bg: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); padding: 3px 8px;"
 				>
 					<img src={icon.src} alt="" style="width: 30px; height: 30px;" />
 					<!-- Text appears on hover -->
@@ -673,5 +673,7 @@
 	}
 	.icon-pill:hover {
 		background-color: var(--hover-bg);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 </style>
