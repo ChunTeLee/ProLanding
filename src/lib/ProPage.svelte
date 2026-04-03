@@ -336,9 +336,9 @@
 
 				<!-- Username + PRO badge -->
 				<div class="flex items-center gap-1.5" style="margin-top: 10px;">
-					<span class="text-[18px] font-semibold text-gray-200" style="opacity: 0.8;">your name</span>
+					<span class="text-[18px] font-semibold leading-none text-gray-200" style="opacity: 0.8;">your name</span>
 					<span
-						class="inline-block -skew-x-12 rounded-md border border-[#141c2e] px-1.5 py-0.5 text-[11px] font-bold leading-tight text-black"
+						class="inline-flex -skew-x-12 items-center rounded-md border border-[#141c2e] px-1.5 py-0.5 text-[11px] font-bold leading-none text-black"
 						style="background: linear-gradient(151deg, rgb(246,51,154) 0%, rgb(0,188,125) 50%, rgb(254,154,0) 100%); box-shadow: 0 10px 15px -3px rgba(0,188,125,0.2), 0 4px 6px -4px rgba(0,188,125,0.2);"
 					>PRO</span>
 				</div>
