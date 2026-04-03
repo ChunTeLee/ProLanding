@@ -23,7 +23,7 @@
 
 	const floatingIcons = [
 		{ src: iconDataset, top: 22, left: 22, color: [255, 100, 103], tooltip: "Private dataset viewer" },
-		{ src: iconStorage, top: 50, left: 18, color: [81, 162, 255], tooltip: "10x Storage" },
+		{ src: iconStorage, top: 47, left: 18, color: [81, 162, 255], tooltip: "10x Storage" },
 		{ src: iconZeroGPU, top: 20, left: 72, color: [255, 255, 255], tooltip: "Unlock ZeroGPU for Spaces" },
 		{ src: iconCredits, top: 52, left: 76, color: [254, 230, 133], tooltip: "20x Inference Credits" },
 		{ src: iconPost, top: 10, left: 58, color: [255, 184, 0], tooltip: "Write Community Post" },
