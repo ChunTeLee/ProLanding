@@ -36,6 +36,9 @@
 	let mouseX = -1000;
 	let mouseY = -1000;
 
+	// Velocity for elastic spring-back effect
+	let iconVelocities: { x: number; y: number }[] = floatingIcons.map(() => ({ x: 0, y: 0 }));
+
 	export let auth: Auth.UserAuthInfoFront;
 	export let promo: Promotion | typeof PROMOTION_UNKNOWN | undefined;
 	export let godmode = false;
@@ -180,19 +183,28 @@
 				ctx.fill();
 			}
 
-			// Update floating icon offsets using the same wave + cursor attraction
+			// Update floating icon offsets using the same wave + cursor attraction with spring physics
 			const magnetRadius = 150; // pixels - distance at which attraction starts
-			const magnetStrength = 0.3; // attraction strength (0-1)
+			const magnetStrength = 0.7; // stronger attraction (0-1)
+			const springStiffness = 0.15; // spring return force
+			const springDamping = 0.85; // damping for smooth return (0-1, higher = more damping)
 
-			const newOffsets = floatingIcons.map((icon) => {
+			const newOffsets = floatingIcons.map((icon, idx) => {
 				const px = (icon.left / 100) * w;
 				const py = (icon.top / 100) * h;
 
-				// Wave displacement
+				// Wave displacement (target position)
 				const phase = (px + py) * waveFreq - time * waveSpeed;
 				const wave = Math.sin(phase);
-				let offsetX = wave * waveAmp * 2.5 * 0.707;
-				let offsetY = wave * waveAmp * 2.5 * 0.707;
+				const targetX = wave * waveAmp * 2.5 * 0.707;
+				const targetY = wave * waveAmp * 2.5 * 0.707;
+
+				// Get current offset and velocity
+				const currentOffset = iconOffsets[idx] || { x: targetX, y: targetY };
+				const velocity = iconVelocities[idx] || { x: 0, y: 0 };
+
+				let finalX = currentOffset.x;
+				let finalY = currentOffset.y;
 
 				// Cursor attraction (magnet effect)
 				if (mouseX > -500 && mouseY > -500) {
@@ -205,13 +217,48 @@
 						const influence = 1 - (distance / magnetRadius);
 						const attraction = influence * influence * magnetStrength; // quadratic falloff
 
-						// Add attraction displacement
-						offsetX += dx * attraction;
-						offsetY += dy * attraction;
+						// Strong pull towards cursor
+						finalX = targetX + dx * attraction;
+						finalY = targetY + dy * attraction;
+
+						// Reset velocity when actively being attracted
+						velocity.x *= 0.5;
+						velocity.y *= 0.5;
+					} else {
+						// Spring physics for elastic return when cursor moves away
+						const forceX = (targetX - currentOffset.x) * springStiffness;
+						const forceY = (targetY - currentOffset.y) * springStiffness;
+
+						// Update velocity with spring force
+						velocity.x += forceX;
+						velocity.y += forceY;
+
+						// Apply damping
+						velocity.x *= springDamping;
+						velocity.y *= springDamping;
+
+						// Update position with velocity
+						finalX = currentOffset.x + velocity.x;
+						finalY = currentOffset.y + velocity.y;
 					}
+				} else {
+					// Spring physics for elastic return when cursor is far away
+					const forceX = (targetX - currentOffset.x) * springStiffness;
+					const forceY = (targetY - currentOffset.y) * springStiffness;
+
+					velocity.x += forceX;
+					velocity.y += forceY;
+					velocity.x *= springDamping;
+					velocity.y *= springDamping;
+
+					finalX = currentOffset.x + velocity.x;
+					finalY = currentOffset.y + velocity.y;
 				}
 
-				return { x: offsetX, y: offsetY };
+				// Update velocity array
+				iconVelocities[idx] = velocity;
+
+				return { x: finalX, y: finalY };
 			});
 			iconOffsets = newOffsets;
 
@@ -715,10 +762,10 @@
 	}
 	.icon-pill {
 		background-color: transparent;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 	.icon-pill:hover {
 		background-color: var(--hover-bg);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
 	}
 </style>
