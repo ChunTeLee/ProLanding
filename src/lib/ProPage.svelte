@@ -389,7 +389,7 @@
 		<section
 			class="hero-section relative flex flex-col items-center justify-center overflow-hidden border-l border-r {bc} mx-auto max-w-7xl"
 			bind:this={heroEl}
-			style="height: 520px;"
+			style="height: 530px;"
 		>
 			<canvas bind:this={dotCanvas} class="pointer-events-none absolute inset-0 h-full w-full"></canvas>
 
@@ -464,7 +464,7 @@
 				<a
 					href={subscribeUrl}
 					class="flex w-fit items-center gap-2.5 whitespace-nowrap rounded-full bg-[#f3f4f6] px-6 py-2.5 text-xl text-black shadow-[0_0_0_4px_#030712,0_0_0_5px_#f3f4f6] transition-all hover:bg-white"
-					style="margin-top: 40px;"
+					style="margin-top: 50px;"
 				>
 					<span>→</span>
 					<span>Subscribe to HF PRO ($9/month)</span>
