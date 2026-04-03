@@ -22,11 +22,11 @@
 	import iconPost from "../assets/icon_post.svg";
 
 	const floatingIcons = [
-		{ src: iconDataset, top: 22, left: 22, color: [255, 100, 103] },
-		{ src: iconStorage, top: 50, left: 18, color: [81, 162, 255] },
-		{ src: iconZeroGPU, top: 20, left: 72, color: [255, 255, 255] },
-		{ src: iconCredits, top: 52, left: 76, color: [254, 230, 133] },
-		{ src: iconPost, top: 10, left: 58, color: [255, 184, 0] },
+		{ src: iconDataset, top: 22, left: 22, color: [255, 100, 103], tooltip: "Private dataset viewer" },
+		{ src: iconStorage, top: 50, left: 18, color: [81, 162, 255], tooltip: "10x Storage" },
+		{ src: iconZeroGPU, top: 20, left: 72, color: [255, 255, 255], tooltip: "Unlock ZeroGPU for Spaces" },
+		{ src: iconCredits, top: 52, left: 76, color: [254, 230, 133], tooltip: "20x Inference Credits" },
+		{ src: iconPost, top: 10, left: 58, color: [255, 184, 0], tooltip: "Write Community Post" },
 	];
 
 	// Reactive icon offsets driven by the wave
@@ -304,10 +304,17 @@
 			<!-- Floating icon pills — wave-driven wiggle -->
 			{#each floatingIcons as icon, i}
 				<div
-					class="absolute z-10 flex items-center justify-center rounded-full px-3 py-2 transition-none"
+					class="group absolute z-10 flex items-center justify-center rounded-full px-3 py-2 transition-none"
 					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px);"
 				>
 					<img src={icon.src} alt="" style="width: 30px; height: 30px;" />
+					<!-- Tooltip on hover -->
+					<div
+						class="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full px-4 py-2 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+						style="background-color: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 500;"
+					>
+						{icon.tooltip}
+					</div>
 				</div>
 			{/each}
 
