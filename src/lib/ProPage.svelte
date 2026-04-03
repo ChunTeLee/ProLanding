@@ -312,7 +312,7 @@
 			{/each}
 
 			<!-- Profile pic with gradient rim + gap + star + name badge -->
-			<div class="relative z-10 flex flex-col items-center" style="margin-top: -30px;">
+			<div class="relative z-10 flex flex-col items-center" style="margin-top: 0px;">
 				<!-- Pro Star icon -->
 				<img
 					src={proStarIcon}
@@ -345,7 +345,7 @@
 			</div>
 
 			<!-- Title + Subtitle — 20px below profile group -->
-			<div class="relative z-10 flex flex-col items-center" style="margin-top: 20px;">
+			<div class="relative z-10 flex flex-col items-center" style="margin-top: 50px;">
 				<h1 class="inline-flex items-baseline whitespace-nowrap tracking-[-1.8px] text-white text-5xl sm:text-6xl md:text-[72px] md:leading-[72px]" style="font-weight: 700;">
 					<span>Hugging Face</span>
 					<span class="relative ml-[0.15em] inline-flex items-baseline">
