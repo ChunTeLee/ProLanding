@@ -319,7 +319,7 @@
 			{/each}
 
 			<!-- Profile pic with gradient rim + gap + star + name badge -->
-			<div class="relative z-10 flex flex-col items-center" style="margin-top: 50px;">
+			<div class="relative z-10 flex flex-col items-center" style="margin-top: 40px;">
 				<!-- Pro Star icon -->
 				<img
 					src={proStarIcon}
