@@ -304,17 +304,17 @@
 			<!-- Floating icon pills — wave-driven wiggle -->
 			{#each floatingIcons as icon, i}
 				<div
-					class="group absolute z-10 flex items-center rounded-full px-3 py-2 transition-none"
-					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px);"
+					class="group absolute z-10 flex items-center gap-[3px] rounded-full transition-none"
+					style="top: {icon.top}%; left: {icon.left}%; transform: translate({iconOffsets[i].x}px, {iconOffsets[i].y}px); background-color: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); padding: 3px 5px;"
 				>
 					<img src={icon.src} alt="" style="width: 30px; height: 30px;" />
-					<!-- Text pill on hover -->
-					<div
-						class="pointer-events-none ml-[3px] whitespace-nowrap rounded-full opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-						style="background-color: rgba({icon.color[0]}, {icon.color[1]}, {icon.color[2]}, 0.1); color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 400; padding: 3px 5px;"
+					<!-- Text appears on hover -->
+					<span
+						class="pointer-events-none max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-200 group-hover:max-w-xs group-hover:opacity-100"
+						style="color: rgb({icon.color[0]}, {icon.color[1]}, {icon.color[2]}); font-family: 'IBM Plex Mono', monospace; font-size: 16px; font-weight: 400;"
 					>
 						{icon.tooltip}
-					</div>
+					</span>
 				</div>
 			{/each}
 
