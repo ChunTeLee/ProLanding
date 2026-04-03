@@ -463,7 +463,7 @@
 				</p>
 				<a
 					href={subscribeUrl}
-					class="flex w-fit items-center gap-2.5 whitespace-nowrap rounded-full bg-[#f3f4f6] px-6 py-2.5 text-xl text-black shadow-[0_0_0_4px_#030712,0_0_0_5px_#f3f4f6] transition-all hover:bg-white"
+					class="flex w-fit items-center gap-2 whitespace-nowrap rounded-full bg-[#f3f4f6] px-5 py-2 text-lg font-semibold text-black shadow-[0_0_0_4px_#030712,0_0_0_5px_#f3f4f6] transition-all hover:bg-white"
 					style="margin-top: 50px;"
 				>
 					<span>→</span>
@@ -734,7 +734,7 @@
 				</p>
 				<a
 					href={subscribeUrl}
-					class="relative z-1 flex w-fit items-center gap-2.5 whitespace-nowrap rounded-full bg-[#f3f4f6] px-6 py-2.5 text-xl text-black shadow-[0_0_0_4px_#0b0f19,0_0_0_5px_#f3f4f6] transition-all hover:bg-white"
+					class="relative z-1 flex w-fit items-center gap-2 whitespace-nowrap rounded-full bg-[#f3f4f6] px-5 py-2 text-lg font-semibold text-black shadow-[0_0_0_4px_#0b0f19,0_0_0_5px_#f3f4f6] transition-all hover:bg-white"
 				><span>→</span><span>Subscribe to HF PRO ($9/month)</span></a>
 			</div>
 		</section>
