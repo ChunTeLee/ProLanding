@@ -762,10 +762,10 @@
 	}
 	.icon-pill {
 		background-color: transparent;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
 	}
 	.icon-pill:hover {
 		background-color: var(--hover-bg);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
 	}
 </style>
