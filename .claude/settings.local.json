@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(xargs grep:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(git init:*)",
+      "Bash(gh repo create:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: Hugging Face PRO landing page\n\n- Svelte 5 + TypeScript + Vite + Tailwind CSS 4 setup\n- Main ProPage component with hero section and feature showcase\n- Advanced canvas animations with wave physics\n- Navbar with full Hugging Face hub navigation\n- Promotional banner system\n- Inference provider widgets\n- Icon components for features\n- Responsive design with dark mode support\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
