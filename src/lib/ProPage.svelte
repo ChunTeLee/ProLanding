@@ -285,15 +285,6 @@
 	const bc = "border-[#141c2e]";
 </script>
 
-<style>
-	.icon-pill {
-		background-color: transparent;
-	}
-	.icon-pill:hover {
-		background-color: var(--hover-bg);
-	}
-</style>
-
 <App {auth} {godmode} footerSize="big">
 	<div class="w-full bg-gray-950">
 		{#if promo === PROMOTION_UNKNOWN}
@@ -676,5 +667,11 @@
 <style>
 	.hero-section {
 		background-color: transparent;
+	}
+	.icon-pill {
+		background-color: transparent;
+	}
+	.icon-pill:hover {
+		background-color: var(--hover-bg);
 	}
 </style>
