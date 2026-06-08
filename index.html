@@ -128,23 +128,17 @@
 
       /* corner connectors: diagonal lines bridging the hatch-padding corners
          to the inner panel corners (storage + inference frames) */
-      .rs-connect { position: absolute; width: 20px; height: 20px; pointer-events: none; z-index: 20; }
-      .rs-connect-tl { top: 0; left: 0; }
-      .rs-connect-tr { top: 0; right: 0; }
-      .rs-connect-bl { bottom: 0; left: 0; }
-      .rs-connect-br { bottom: 0; right: 0; }
-      /* main diagonal (top-left & bottom-right corners) */
-      .rs-connect-tl, .rs-connect-br {
-        background: linear-gradient(to top right,
-          transparent calc(50% - 0.6px), rgba(17, 24, 39, 0.5) calc(50% - 0.6px),
-          rgba(17, 24, 39, 0.5) calc(50% + 0.6px), transparent calc(50% + 0.6px));
+      /* 1px dashed diagonal lines (rotated), matching the section border
+         width/style; each spans the 20px inner padding (diagonal = 28.28px) */
+      .rs-connect {
+        position: absolute; width: 28.28px; height: 0;
+        border-top: 1px solid rgba(229, 231, 235, 0.7);
+        pointer-events: none; z-index: 20;
       }
-      /* anti-diagonal (top-right & bottom-left corners) */
-      .rs-connect-tr, .rs-connect-bl {
-        background: linear-gradient(to bottom right,
-          transparent calc(50% - 0.6px), rgba(17, 24, 39, 0.5) calc(50% - 0.6px),
-          rgba(17, 24, 39, 0.5) calc(50% + 0.6px), transparent calc(50% + 0.6px));
-      }
+      .rs-connect-tl { top: 0; left: 0; transform-origin: left top; transform: rotate(45deg); }
+      .rs-connect-tr { top: 0; right: 0; transform-origin: right top; transform: rotate(-45deg); }
+      .rs-connect-bl { bottom: 0; left: 0; transform-origin: left bottom; transform: rotate(-45deg); }
+      .rs-connect-br { bottom: 0; right: 0; transform-origin: right bottom; transform: rotate(45deg); }
 
       /* segmented version switch (Current | Grid) */
       .ver-switch {
@@ -165,7 +159,7 @@
       .ver-switch button.active:hover { color: #fff; }
     </style>
     <title>PRO Account - Hugging Face</title>
-    <script type="module" crossorigin src="/ProLanding/assets/index-BMIBXno8.js"></script>
+    <script type="module" crossorigin src="/ProLanding/assets/index-DURaSzv0.js"></script>
     <link rel="stylesheet" crossorigin href="/ProLanding/assets/index-C4SPBCkT.css">
   </head>
   <body>
