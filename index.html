@@ -6,12 +6,193 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>prolanding</title>
-    <script type="module" crossorigin src="/ProLanding/assets/index-Ce14gGhF.js"></script>
-    <link rel="stylesheet" crossorigin href="/ProLanding/assets/index-BGttNdPW.css">
+    <link rel="stylesheet" href="/ProLanding/hf-style.css" />
+    <style>
+      /* "Elevated blueprint" charts for the storage & inference graphs.
+         Crisp hairline cards (the dashed/hatch texture lives on the outer
+         frame only), 4 corner brackets, measurement-grid tracks with tick
+         rulers, right-aligned monospace value column. Light HF theme. */
+      .bp-card {
+        position: relative;
+        background: #fff;
+        border: 1px solid rgba(17, 24, 39, 0.08);
+        border-radius: 6px;
+        padding: 16px 18px;
+      }
+      .bp-card-pro { border-color: rgba(234, 88, 12, 0.28); }
+      /* 4 corner brackets */
+      .bp-corner { position: absolute; width: 7px; height: 7px; border-color: rgba(17, 24, 39, 0.4); pointer-events: none; }
+      .bp-card-pro .bp-corner { border-color: rgba(234, 88, 12, 0.55); }
+      .bp-c-tl { top: -1px; left: -1px; border-top: 1.5px solid; border-left: 1.5px solid; }
+      .bp-c-tr { top: -1px; right: -1px; border-top: 1.5px solid; border-right: 1.5px solid; }
+      .bp-c-bl { bottom: -1px; left: -1px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+      .bp-c-br { bottom: -1px; right: -1px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+      /* mono uppercase title */
+      .bp-title {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+        color: #6b7280; margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
+      }
+      .bp-rows { display: flex; flex-direction: column; gap: 9px; }
+      /* tighter tag + value columns and gap => longer bars */
+      .bp-row { display: grid; grid-template-columns: 38px 1fr 44px; align-items: center; column-gap: 8px; }
+      .bp-row-notag { grid-template-columns: 1fr 44px; }
+      .bp-tag { font-size: 11px; color: #6b7280; }
+      .bp-pill {
+        display: inline-block; font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 9px; font-weight: 700; letter-spacing: 0.08em; padding: 1px 6px; border-radius: 3px;
+      }
+      .bp-pill-blue { background: rgba(59, 130, 246, 0.12); color: #2563eb; }
+      .bp-pill-orange { background: rgba(234, 88, 12, 0.12); color: #ea580c; }
+      /* measurement-grid track */
+      .bp-track {
+        position: relative; height: 9px; border-radius: 2px;
+        background: rgba(17, 24, 39, 0.05);
+        box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.04);
+        overflow: hidden;
+        background-image: repeating-linear-gradient(
+          to right, transparent 0, transparent calc(25% - 1px),
+          rgba(17, 24, 39, 0.08) calc(25% - 1px), rgba(17, 24, 39, 0.08) 25%);
+      }
+      .bp-fill { position: relative; height: 100%; border-radius: 2px; }
+      .bp-fill-mute { background: #9ca3af; }
+      .bp-fill-blue { background: #3b82f6; }
+      .bp-fill-orange { background: #f59e0b; }
+      .bp-val { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11px; color: #6b7280; text-align: right; white-space: nowrap; }
+      .bp-val-blue { color: #2563eb; font-weight: 600; }
+      .bp-val-orange { color: #d97706; font-weight: 600; }
+      /* tick ruler aligned to the track column */
+      .bp-rulerrow { margin-top: 3px; }
+      .bp-ruler { display: flex; justify-content: space-between; }
+      .bp-ruler i { width: 1px; height: 5px; background: rgba(17, 24, 39, 0.18); }
+      .bp-vs { text-align: center; font-size: 11px; font-weight: 500; color: #9ca3af; letter-spacing: 0.1em; }
+      /* combined-card sub-group label + divider */
+      .bp-sub {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+        color: #6b7280; margin-bottom: 10px;
+      }
+      /* full-bleed hatch separator: spans edge-to-edge of the card (cancels
+         the 18px side padding), framed by dashed top + bottom borders */
+      .bp-divider {
+        height: 16px; margin: 14px -18px;
+        border: 0;
+        border-top: 1px dashed rgba(17, 24, 39, 0.16);
+        border-bottom: 1px dashed rgba(17, 24, 39, 0.16);
+        background: repeating-linear-gradient(135deg,
+          transparent 0, transparent 4px,
+          rgba(17, 24, 39, 0.10) 4px, rgba(17, 24, 39, 0.10) 5px);
+      }
+      /* re-implemented "+15 providers available" footer — pushed right,
+         icon list fades at its end to imply more providers */
+      .bp-providers {
+        display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+        flex-wrap: nowrap; margin-top: 14px; padding-top: 12px;
+        border-top: 1px dashed rgba(17, 24, 39, 0.12);
+      }
+      .bp-providers-label {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 12px; letter-spacing: 0.02em; color: #9ca3af;
+        white-space: nowrap; flex: none;
+      }
+      /* icons balanced to the 12px label */
+      .bp-providers .text-lg { font-size: 15px; line-height: 1; }
+      /* fade the right end of the logo row for an "extending" illusion */
+      .bp-providers > .flex {
+        flex: none;
+        -webkit-mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+        mask-image: linear-gradient(to right, #000 55%, transparent 100%);
+      }
+
+      /* ===== Version switch: "Grid" restores the FULL previous setup =====
+         (1) grid-pattern bg + dashed cards, AND
+         (2) the previous layout: larger panel padding + centered max-w-md content. */
+      body.gridbg .bp-card {
+        border-style: dashed;
+        background-image:
+          linear-gradient(to right, rgba(17, 24, 39, 0.05) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(17, 24, 39, 0.05) 1px, transparent 1px);
+        background-size: 16px 16px;
+      }
+      body.gridbg .bp-card-pro {
+        background-image:
+          linear-gradient(to right, rgba(234, 88, 12, 0.06) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(234, 88, 12, 0.06) 1px, transparent 1px);
+        background-size: 16px 16px;
+      }
+      /* previous layout: revert the adaptive-fill 20px panels + full-width content */
+      body.gridbg .rs-panel { padding: 32px 48px; }
+      body.gridbg .rs-content { max-width: 28rem; margin-left: auto; margin-right: auto; }
+
+      /* corner connectors: diagonal lines bridging the hatch-padding corners
+         to the inner panel corners (storage + inference frames) */
+      .rs-connect { position: absolute; width: 20px; height: 20px; pointer-events: none; z-index: 20; }
+      .rs-connect-tl { top: 0; left: 0; }
+      .rs-connect-tr { top: 0; right: 0; }
+      .rs-connect-bl { bottom: 0; left: 0; }
+      .rs-connect-br { bottom: 0; right: 0; }
+      /* main diagonal (top-left & bottom-right corners) */
+      .rs-connect-tl, .rs-connect-br {
+        background: linear-gradient(to top right,
+          transparent calc(50% - 0.6px), rgba(17, 24, 39, 0.5) calc(50% - 0.6px),
+          rgba(17, 24, 39, 0.5) calc(50% + 0.6px), transparent calc(50% + 0.6px));
+      }
+      /* anti-diagonal (top-right & bottom-left corners) */
+      .rs-connect-tr, .rs-connect-bl {
+        background: linear-gradient(to bottom right,
+          transparent calc(50% - 0.6px), rgba(17, 24, 39, 0.5) calc(50% - 0.6px),
+          rgba(17, 24, 39, 0.5) calc(50% + 0.6px), transparent calc(50% + 0.6px));
+      }
+
+      /* segmented version switch (Current | Grid) */
+      .ver-switch {
+        position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+        display: inline-flex; align-items: center; gap: 2px;
+        font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11.5px; line-height: 1;
+        background: #fff; border: 1px solid rgba(17, 24, 39, 0.12); border-radius: 9999px;
+        padding: 3px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.10); user-select: none;
+      }
+      .ver-switch button {
+        appearance: none; border: 0; background: transparent; cursor: pointer;
+        color: #6b7280; padding: 6px 14px; border-radius: 9999px;
+        font-family: inherit; font-size: inherit;
+        transition: background 0.25s cubic-bezier(0.32, 0.72, 0, 1), color 0.25s;
+      }
+      .ver-switch button:hover { color: #111827; }
+      .ver-switch button.active { background: #111827; color: #fff; }
+      .ver-switch button.active:hover { color: #fff; }
+    </style>
+    <title>PRO Account - Hugging Face</title>
+    <script type="module" crossorigin src="/ProLanding/assets/index-BMIBXno8.js"></script>
+    <link rel="stylesheet" crossorigin href="/ProLanding/assets/index-C4SPBCkT.css">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app"></div>
+    <div class="ver-switch" role="group" aria-label="Right-section version">
+      <button type="button" data-ver="current">Current</button>
+      <button type="button" data-ver="grid">Grid</button>
+    </div>
+    <script>
+      (function () {
+        var body = document.body;
+        var sw = document.querySelector(".ver-switch");
+        if (!sw) return;
+        var btns = sw.querySelectorAll("button");
+        function apply(ver) {
+          var grid = ver === "grid";
+          body.classList.toggle("gridbg", grid);
+          btns.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-ver") === ver); });
+          try { localStorage.setItem("rsver", ver); } catch (e) {}
+        }
+        var saved = "current";
+        try { saved = localStorage.getItem("rsver") || "current"; } catch (e) {}
+        apply(saved === "grid" ? "grid" : "current");
+        btns.forEach(function (b) {
+          b.addEventListener("click", function () { apply(b.getAttribute("data-ver")); });
+        });
+      })();
+    </script>
   </body>
 </html>
