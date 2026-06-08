@@ -32,8 +32,9 @@
       /* mono uppercase title */
       .bp-title {
         font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
-        color: #6b7280; margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
+        font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+        color: oklch(0.551 0.027 264.364); /* gray-500, matches huggingface.co/pro */
+        margin-bottom: 14px; display: flex; align-items: center; gap: 6px;
       }
       .bp-rows { display: flex; flex-direction: column; gap: 9px; }
       /* tighter tag + value columns and gap => longer bars */
@@ -71,8 +72,9 @@
       /* combined-card sub-group label + divider */
       .bp-sub {
         font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
-        color: #6b7280; margin-bottom: 10px;
+        font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+        color: oklch(0.551 0.027 264.364); /* gray-500, matches huggingface.co/pro */
+        margin-bottom: 10px;
       }
       /* full-bleed hatch separator: spans edge-to-edge of the card (cancels
          the 18px side padding), framed by dashed top + bottom borders */
